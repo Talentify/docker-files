@@ -1,6 +1,6 @@
 FROM php:7.1-apache
-LABEL version="0.2.0"
-LABEL description="TalentFlux PHP + Phalcon image."
+LABEL version="0.1.0"
+LABEL description="TalentFlux PHP image."
 
 ENV PHALCON_VERSION=3.2.4
 
@@ -37,7 +37,5 @@ RUN pecl install xdebug-2.6.0 \
 COPY php.ini /usr/local/etc/php/php.ini
 
 RUN a2enmod rewrite
-
-RUN curl -sS http://localhost/sql-update
 
 WORKDIR /var/www/
