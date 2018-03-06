@@ -1,6 +1,6 @@
 FROM php:7.1-apache
 LABEL version="0.2.0"
-LABEL description="TalentFlux PHP image."
+LABEL description="TalentFlux PHP + Phalcon image."
 
 ENV PHALCON_VERSION=3.2.4
 
