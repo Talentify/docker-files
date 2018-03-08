@@ -22,5 +22,7 @@ xvfb-run -n $SERVERNUM --server-args="-screen 0 $GEOMETRY -ac +extension RANDR" 
   ${SE_OPTS} &
 NODE_PID=$!
 
+service ssh start
+
 trap shutdown SIGTERM SIGINT
 wait $NODE_PID
