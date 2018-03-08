@@ -4,7 +4,7 @@ RUN sudo apt-get -y update && sudo apt-get install -y openssh-server
 
 USER root
 
-RUN passwd -d root \
+RUN echo "root:root" | chpasswd \
     && sed -i '/PermitRootLogin prohibit-password/c\PermitRootLogin yes' /etc/ssh/sshd_config
 
 COPY entry_point.sh /opt/bin/entry_point.sh
