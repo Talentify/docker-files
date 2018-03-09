@@ -1,5 +1,5 @@
 FROM node:9-stretch
-LABEL version="0.1.0"
+LABEL version="0.1.1"
 LABEL description="TalentFlux image to transpile assets and deploy the project."
 
 RUN apt-get update  \
@@ -9,8 +9,8 @@ RUN apt-get update  \
     && gem install sass --no-user-install \
     && pip install awsebcli
 
-COPY init.sh /init.sh
+COPY start.sh /usr/local/bin/start.sh
 
 WORKDIR /app
 
-CMD ["/bin/bash", "/init.sh"]
+CMD ["start.sh"]
