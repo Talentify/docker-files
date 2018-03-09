@@ -11,8 +11,6 @@ RUN apt-get update && apt-get install -y \
         libpng-dev \
         libyaml-dev \
         mysql-client \
-        ssh \
-        sshpass \
         && docker-php-ext-install mysqli \
         && docker-php-ext-install pdo_mysql \
         && docker-php-ext-install zip \
