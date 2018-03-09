@@ -11,4 +11,5 @@ RUN curl -sL https://deb.nodesource.com/setup_9.x | bash - \
     && gem update --system \
     && gem install sass --no-user-install \
     && pip install --upgrade six \
-    && pip install awsebcli
+    && pip install awsebcli \
+    && npm install -g grunt-cli
