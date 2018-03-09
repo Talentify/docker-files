@@ -1,6 +1,6 @@
 FROM php:7.1-apache
 LABEL version="0.1.0"
-LABEL description="TalentFlux PHP image."
+LABEL description="Image for Flux application."
 
 ENV PHALCON_VERSION=3.2.4
 
@@ -33,9 +33,6 @@ RUN cd /usr/src \
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin -- --filename=composer
 RUN composer global require hirak/prestissimo
-
-RUN pecl install xdebug-2.6.0 \
-        && docker-php-ext-enable xdebug
 
 COPY php.ini /usr/local/etc/php/php.ini
 
