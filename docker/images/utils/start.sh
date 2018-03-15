@@ -14,4 +14,4 @@ echo "Starting grunt"
 node_modules/grunt/bin/grunt wjs &
 
 echo "Starting sass"
-sass --watch static/sass:public/css
+sass --sourcemap=none --watch --poll static/sass:public/css
