@@ -1,5 +1,5 @@
 FROM php:7.1-apache
-LABEL version="0.1.0"
+LABEL version="0.2.0"
 LABEL description="Image for Flux application."
 
 ENV PHALCON_VERSION=3.2.4
@@ -11,6 +11,7 @@ RUN apt-get update && apt-get install -y \
         libpng-dev \
         libyaml-dev \
         mysql-client \
+        ssl-cert \
         && docker-php-ext-install mysqli \
         && docker-php-ext-install pdo_mysql \
         && docker-php-ext-install zip \
@@ -34,6 +35,10 @@ RUN composer global require hirak/prestissimo
 
 COPY php.ini /usr/local/etc/php/php.ini
 
-RUN a2enmod rewrite
+RUN a2enmod rewrite ssl
+
+COPY --chown=www-data sites-enable/ssl.conf /etc/apache2/sites-enabled/ssl.conf
+
+EXPOSE 443
 
 WORKDIR /var/www/
