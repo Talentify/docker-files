@@ -1,4 +1,4 @@
-FROM talentify/php-apache
+FROM talentify/php-apache:base
 LABEL version="0.1.0"
 LABEL description="Image for CI on Flux application."
 

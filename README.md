@@ -1,3 +1,7 @@
+# Docker files
+
+
+## About
 This repository contains all images used by the Talentify dev team to build, test and deploy applications
 
 There are 3 main repositories:
@@ -27,3 +31,10 @@ There are 3 main repositories:
     - Based on [selenium/standalone-chrome](https://hub.docker.com/r/selenium/standalone-chrome/)
     - Has sshd running with root access via password `root`
     - [Dockerfile](https://github.com/Talentify/docker-files/tree/master/docker/images/ssh-selenium-standalone-chrome)
+
+
+## Troubleshooting
+
+#### illegal instruction
+Please, build all images using an Intel CPU.
+

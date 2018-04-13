@@ -1,0 +1,29 @@
+version: '3.5'
+
+# This file is an example to build all this images.
+# run: docker-compose build
+
+services:
+  app-latest:
+    build: docker/images/php-apache/base
+    image: talentify/php-apache:latest
+
+  app-base:
+    build: docker/images/php-apache/base
+    image: talentify/php-apache:base
+
+  app-dev:
+    build: docker/images/php-apache/dev
+    image: talentify/php-apache:dev
+
+  app-circle:
+    build: docker/images/php-apache/circle
+    image: talentify/php-apache:circle
+
+  selenium:
+    image: selenium/standalone-chrome:latest
+
+  utils:
+    build: docker/images/utils
+    image: talentify/utils:latest
+
