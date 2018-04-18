@@ -1,8 +1,8 @@
 FROM php:7.1-apache
-LABEL version="0.2.0"
+LABEL version="0.3.0"
 LABEL description="Image for Flux application."
 
-ENV PHALCON_VERSION=3.2.4
+ENV PHALCON_VERSION=3.3.2
 
 RUN apt-get update && apt-get install -y \
         libcurl3 \
