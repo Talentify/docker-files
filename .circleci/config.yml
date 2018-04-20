@@ -12,7 +12,7 @@ jobs:
           command: docker build -t talentify/php-apache:base docker/images/php-apache/base
       - run:
           name: Tagging php-apache:latest
-          command: docker tag talentify/php-apache:latest talentify/php-apache:base
+          command: docker build -t talentify/php-apache:latest docker/images/php-apache/base
       - run:
           name: Build php-apache:dev
           command: docker build -t talentify/php-apache:devdocker/images/php-apache/dev
