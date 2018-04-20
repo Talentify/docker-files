@@ -23,6 +23,10 @@ services:
   selenium:
     image: selenium/standalone-chrome:latest
 
+  ssh-selenium-standalone-chrome:
+    build: docker/images/ssh-selenium-standalone-chrome
+    image: talentify/ssh-selenium-standalone-chrome:latest
+
   utils:
     build: docker/images/utils
     image: talentify/utils:latest
