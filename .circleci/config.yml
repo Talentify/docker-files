@@ -11,11 +11,11 @@ jobs:
           name: Build php-apache:base
           command: docker build -t talentify/php-apache:base docker/images/php-apache/base
       - run:
-          name: Tagging php-apache:latest
+          name: Build php-apache:latest
           command: docker build -t talentify/php-apache:latest docker/images/php-apache/base
       - run:
           name: Build php-apache:dev
-          command: docker build -t talentify/php-apache:devdocker/images/php-apache/dev
+          command: docker build -t talentify/php-apache:dev docker/images/php-apache/dev
       - run:
           name: Build php-apache:circle
           command: docker build -t talentify/php-apache:circle docker/images/php-apache/circle
