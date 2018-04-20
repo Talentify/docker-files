@@ -1,25 +1,20 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/repo
+    working_directory: /repo
     docker:
       - image: docker:stable-git
     steps:
       - checkout
       - setup_remote_docker
       - run:
-          name: Install docker-compose
-          command:  |
-              apt-get update &&
-              apt-get install -y curl &&
-              curl -L https://github.com/docker/compose/releases/download/1.21.0/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose &&
-              chmod +x /usr/local/bin/docker-compose
+          name: Install dependencies
+          command: |
+            apk add --no-cache py-pip=9.0.0-r1 &&
+            pip install docker-compose==1.12.0
       - run:
-          name: Checking installed versions
-          command: docker --version && docker-compose --version
-      - run:
-          name: Build images
+          name: Build application Docker image
           command: docker-compose build
       - run:
-          name: Check images list
+          name: List images
           command: docker images
