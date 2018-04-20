@@ -8,15 +8,23 @@ jobs:
       - checkout
       - setup_remote_docker
       - run:
-          name: Install dependencies
-          command:  |
-               apk add --no-cache \
-                 py-pip=9.0.1-r1
-               pip install \
-                 docker-compose==1.19.0 \
+          name: Build php-apache:base
+          command: docker build -t talentify/php-apache:base docker/images/php-apache/base
       - run:
-          name: Build application Docker image
-          command: docker-compose build
+          name: Tagging php-apache:latest
+          command: docker tag talentify/php-apache:latest talentify/php-apache:base
+      - run:
+          name: Build php-apache:dev
+          command: docker build -t talentify/php-apache:devdocker/images/php-apache/dev
+      - run:
+          name: Build php-apache:circle
+          command: docker build -t talentify/php-apache:circle docker/images/php-apache/circle
+      - run:
+          name: Build ssh-selenium-standalone-chrome
+          command: docker build -t talentify/ssh-selenium-standalone-chrome:latest docker/images/ssh-selenium-standalone-chrome
+      - run:
+          name: Build utils:latest
+          command: docker build -t talentify/utils:latest docker/images/utils
       - run:
           name: List images
           command: docker images
