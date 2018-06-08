@@ -11,20 +11,20 @@ jobs:
           name: Build php-apache:base
           command: docker build -t talentify/php-apache:base docker/images/php-apache/base
       - run:
-          name: Build php-apache:latest
-          command: docker build -t talentify/php-apache:latest docker/images/php-apache/base
-      - run:
-          name: Build php-apache:dev
-          command: docker build -t talentify/php-apache:dev docker/images/php-apache/dev
-      - run:
           name: Build php-apache:circle
           command: docker build -t talentify/php-apache:circle docker/images/php-apache/circle
       - run:
           name: Build ssh-selenium-standalone-chrome
           command: docker build -t talentify/ssh-selenium-standalone-chrome:latest docker/images/ssh-selenium-standalone-chrome
       - run:
-          name: Build utils:latest
-          command: docker build -t talentify/utils:latest docker/images/utils
-      - run:
           name: List images
           command: docker images
+      - run:
+          name: Login into DockerHub
+          command: docker login -u $DOCKER_USER -p $DOCKER_PASS
+      - run:
+          name: Push images
+          command: |
+            docker push talentify/php-apache:base
+            docker push talentify/php-apache:circle
+            docker push talentify/ssh-selenium-standalone-chrome:latest
