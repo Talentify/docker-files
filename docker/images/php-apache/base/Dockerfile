@@ -39,7 +39,9 @@ COPY php.ini /usr/local/etc/php/php.ini
 
 RUN a2enmod rewrite ssl
 
-COPY --chown=www-data sites-enable/ssl.conf /etc/apache2/sites-enabled/ssl.conf
+COPY sites-enable/ssl.conf /etc/apache2/sites-enabled/ssl.conf
+
+RUN chown www-data /etc/apache2/sites-enabled/ssl.conf
 
 EXPOSE 443
 
