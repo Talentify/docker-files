@@ -3,11 +3,11 @@ LABEL version="0.1.0"
 LABEL description="Image for CI on Flux application."
 
 #precisa do git pra o cli da amazon poder fazer o deploy
-RUN curl -sL https://deb.nodesource.com/setup_9.x | bash - \
+RUN apt-get install gnupg --assume-yes \
+    && curl -sL https://deb.nodesource.com/setup_9.x | bash - \
     && apt-get update  \
     && apt-get install ruby-dev rubygems \
     git \
-    gnupg \
     nodejs \
     python-dev python-pip\
     ssh sshpass \
