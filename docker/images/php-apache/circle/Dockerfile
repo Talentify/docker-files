@@ -7,6 +7,7 @@ RUN curl -sL https://deb.nodesource.com/setup_9.x | bash - \
     && apt-get update  \
     && apt-get install ruby-dev rubygems \
     git \
+    gnupg \
     nodejs \
     python-dev python-pip\
     ssh sshpass \
