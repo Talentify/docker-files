@@ -28,6 +28,7 @@ RUN apt-get update && apt-get install -y \
 RUN cd /usr/src \
         && curl -sSL "https://codeload.github.com/phalcon/cphalcon/tar.gz/v${PHALCON_VERSION}" | tar -xz \
         && cd cphalcon-${PHALCON_VERSION}/build \
+        && sed -i -e 's/-march=native -mtune=native/-march=core-avx-i -mtune=core-avx-i/g' install \
         && ./install \
         && cd ../../ \
         && rm -r cphalcon-${PHALCON_VERSION}
@@ -41,7 +42,11 @@ RUN a2enmod rewrite ssl
 
 COPY sites-enable/ssl.conf /etc/apache2/sites-enabled/ssl.conf
 
+COPY sites-enable/000-default.conf /etc/apache2/sites-enabled/000-default.conf
+
 RUN chown www-data /etc/apache2/sites-enabled/ssl.conf
+
+RUN chown www-data /etc/apache2/sites-enabled/000-default.conf
 
 EXPOSE 443
 
