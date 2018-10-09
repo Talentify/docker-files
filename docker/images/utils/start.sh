@@ -10,8 +10,8 @@ done
 echo "Running npm install"
 npm install
 
-echo "Starting grunt"
-node_modules/grunt/bin/grunt wjs &
+echo "Starting gulp"
+node_modules/gulp/bin/gulp.js watch &
 
 echo "Starting sass"
 sass --sourcemap=none --watch --poll static/sass:public/css
