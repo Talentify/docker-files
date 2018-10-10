@@ -8,7 +8,7 @@ while [[ ! -f package.json ]]; do
 done
 
 echo "Running npm install"
-npm install
+npm install --no-bin-links
 
 echo "Starting gulp"
 node_modules/gulp/bin/gulp.js watch &
