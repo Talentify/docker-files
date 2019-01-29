@@ -1,9 +1,16 @@
-FROM php:7.1-apache
-LABEL version="0.4.0"
+FROM gnumoksha/phalcon-framework:3.3-php-7.1-apache-stretch
+LABEL version="0.5.0"
 LABEL description="Image for Flux application."
 
-ENV PHALCON_VERSION=3.3.2
+#
+# Configure PHP
+#
+RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini" &&\
+    pecl config-set php_ini "$PHP_INI_DIR/php.ini"
 
+#
+# Install dependencies
+#
 # RabbitMQ/amqp extension needs librabbitmq-dev and libssh-dev apt packages.
 # Source: https://github.com/php-amqplib/php-amqplib/issues/521#issuecomment-357807290
 RUN apt-get update && apt-get install -y \
@@ -21,8 +28,6 @@ RUN apt-get update && apt-get install -y \
         && docker-php-ext-install -j$(nproc) gd \
         && docker-php-ext-install mysqli \
         pdo_mysql \
-        zip \
-        mbstring \
         soap \
         && pecl install redis \
         yaml \
@@ -33,29 +38,11 @@ RUN apt-get update && apt-get install -y \
         mailparse \
         amqp
 
-RUN cd /usr/src \
-        && curl -sSL "https://codeload.github.com/phalcon/cphalcon/tar.gz/v${PHALCON_VERSION}" | tar -xz \
-        && cd cphalcon-${PHALCON_VERSION}/build \
-        && sed -i -e 's/-march=native -mtune=native/-march=core-avx-i -mtune=core-avx-i/g' install \
-        && ./install \
-        && cd ../../ \
-        && rm -r cphalcon-${PHALCON_VERSION}
-
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin -- --filename=composer
-RUN composer global require hirak/prestissimo
-
-COPY php.ini /usr/local/etc/php/php.ini
-
+#
+# Configure Apache
+#
 RUN a2enmod rewrite ssl
-
-COPY sites-enable/ssl.conf /etc/apache2/sites-enabled/ssl.conf
-
-COPY sites-enable/000-default.conf /etc/apache2/sites-enabled/000-default.conf
-
-RUN chown www-data /etc/apache2/sites-enabled/ssl.conf
-
-RUN chown www-data /etc/apache2/sites-enabled/000-default.conf
-
+COPY --chown=www-data sites-enable/* /etc/apache2/sites-enabled/
 EXPOSE 443
 
 WORKDIR /var/www/
