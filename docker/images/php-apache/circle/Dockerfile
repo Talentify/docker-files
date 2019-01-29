@@ -2,11 +2,12 @@ FROM talentify/php-apache:base
 LABEL version="0.1.0"
 LABEL description="Image for CI on Flux application."
 
+RUN apt-get update \
+    && apt-get install --assume-yes gnupg \
+    && curl -sL https://deb.nodesource.com/setup_9.x | bash -
+
 #precisa do git pra o cli da amazon poder fazer o deploy
-RUN apt-get install gnupg --assume-yes \
-    && curl -sL https://deb.nodesource.com/setup_9.x | bash - \
-    && apt-get update  \
-    && apt-get install ruby-dev rubygems \
+RUN apt-get install ruby-dev rubygems \
     git \
     nodejs \
     python-dev python-pip\

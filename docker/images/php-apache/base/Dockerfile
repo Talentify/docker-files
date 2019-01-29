@@ -1,5 +1,5 @@
 FROM gnumoksha/phalcon-framework:3.3-php-7.1-apache-stretch
-LABEL version="0.5.0"
+LABEL version="0.6.0"
 LABEL description="Image for Flux application."
 
 #
@@ -44,5 +44,21 @@ RUN apt-get update && apt-get install -y \
 RUN a2enmod rewrite ssl
 COPY --chown=www-data sites-enable/* /etc/apache2/sites-enabled/
 EXPOSE 443
+
+#
+# Add the ability to run commands as other user
+#
+ENV FLUX_USER=flux FLUX_GROUP=flux FLUX_USER_ID=1000 FLUX_USER_GID=1000
+# Install gosu. Source: https://github.com/tianon/gosu/blob/master/INSTALL.md
+RUN set -eux; \
+	apt-get update; \
+	apt-get install -y gosu; \
+	rm -rf /var/lib/apt/lists/*; \
+	# verify that the binary works
+	gosu nobody true
+COPY docker-flux-entrypoint /usr/local/bin
+ENTRYPOINT ["docker-flux-entrypoint"]
+# somehow CMD is undefined when I set ENTRYPOINT
+CMD ["apache2-foreground"]
 
 WORKDIR /var/www/
