@@ -1,5 +1,5 @@
-FROM talentify/php-apache:base
-LABEL version="0.1.0"
+FROM talentify/php-apache:latest
+LABEL version="0.1.1"
 LABEL description="Image for development on Flux application."
 
 COPY xdebug.ini /tmp

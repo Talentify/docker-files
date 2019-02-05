@@ -1,5 +1,5 @@
 FROM talentify/phalcon-framework:3.3-php-7.1-apache-stretch
-LABEL version="0.7.0"
+LABEL version="0.7.1"
 LABEL description="Image for Flux application."
 
 #
