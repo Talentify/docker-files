@@ -1,5 +1,5 @@
-FROM gnumoksha/phalcon-framework:3.3-php-7.1-apache-stretch
-LABEL version="0.6.0"
+FROM talentify/phalcon-framework:3.3-php-7.1-apache-stretch
+LABEL version="0.7.0"
 LABEL description="Image for Flux application."
 
 #
@@ -58,7 +58,13 @@ RUN set -eux; \
 	gosu nobody true
 COPY docker-flux-entrypoint /usr/local/bin
 ENTRYPOINT ["docker-flux-entrypoint"]
-# somehow CMD is undefined when I set ENTRYPOINT
+# Somehow CMD is undefined when I set ENTRYPOINT, so I set CMD again (as base image does).
 CMD ["apache2-foreground"]
+
+#
+# Add composer
+#
+COPY --from=composer:1.5 /usr/bin/composer /usr/bin/composer
+#RUN /usr/local/bin/docker-flux-entrypoint php /usr/bin/composer global require hirak/prestissimo
 
 WORKDIR /var/www/

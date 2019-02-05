@@ -10,7 +10,8 @@ getent group "$FLUX_GROUP" 2>&1 > /dev/null || groupadd -r $FLUX_GROUP --gid=$FL
 getent passwd "$FLUX_USER" 2>&1 > /dev/null || useradd -r -g $FLUX_GROUP -G www-data --uid=$FLUX_USER_ID --home-dir=/var/www --shell=/bin/bash $FLUX_USER
 
 if [ "$1" = 'php' ] || [ "$1" = 'composer' ]; then
-    echo "Running as user \"$FLUX_USER\"..." # avoid time debugging
+    # show this message in order to avoid time debugging possible problems
+    echo "Running command \"$@\" as user \"$FLUX_USER\"..."
 	exec gosu $FLUX_USER "$@"
 	exit 0
 fi
