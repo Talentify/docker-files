@@ -1,4 +1,4 @@
-FROM selenium/standalone-chrome
+FROM selenium/standalone-chrome:3.141.59-fluorine
 
 RUN sudo apt-get -y update && sudo apt-get install -y openssh-server
 
