@@ -1,8 +1,13 @@
-#!/bin/sh
+#!/bin/bash
 set -e
 
 # Check if the command must be executed as flux user
-. flux-run
+if [[ "$1" = 'php' || "$1" = 'composer' || "$1" =~ ^vendor/bin/ ]]; then
+    # Show this message in order to avoid time debugging possible problems
+    echo "[NOTICE] running command \"$@\" as user \"$FLUX_USER\"."
+	flux-run "$@"
+	exit 0
+fi
 
 # Fallback to image default entry point
 . docker-php-entrypoint

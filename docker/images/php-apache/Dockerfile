@@ -2,7 +2,7 @@
 # Base image
 #
 FROM talentify/phalcon-framework:3.3-php-7.1-apache-stretch AS base
-LABEL version="1.0.0"
+LABEL version="1.1.0"
 LABEL description="Image for Flux application."
 
 # Install dependencies
@@ -95,3 +95,6 @@ RUN apt-get install ruby-dev rubygems \
     && curl -sOL https://github.com/jwilder/dockerize/releases/download/v0.6.1/dockerize-linux-amd64-v0.6.1.tar.gz \
     && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-v0.6.1.tar.gz \
     && rm dockerize-linux-amd64-v0.6.1.tar.gz
+# Add composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+RUN composer global require hirak/prestissimo
