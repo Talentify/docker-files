@@ -1,0 +1,18 @@
+#!/bin/sh
+#
+# Add the ability to run commands as other user
+#
+set -e
+
+# Add user and group if not already exists.
+getent group "$FLUX_GROUP" 2>&1 > /dev/null || groupadd -r $FLUX_GROUP --gid=$FLUX_USER_GID
+getent passwd "$FLUX_USER" 2>&1 > /dev/null || useradd -r -g $FLUX_GROUP -G www-data --uid=$FLUX_USER_ID --create-home --shell=/bin/bash $FLUX_USER
+
+if [ "$1" = 'php' ] || [ "$1" = 'composer' ]; then
+    # Show this message in order to avoid time debugging possible problems
+    echo "[NOTICE] running command \"$@\" as user \"$FLUX_USER\"."
+	exec gosu $FLUX_USER "$@"
+	exit 0
+fi
+
+#[[ 'vendor/bin/codecept' =~ ^vendor/bin/ ]] && echo "yes"

@@ -1,15 +1,40 @@
 #!/usr/bin/env bash
 set -ex
 
-# docker hub username
-USERNAME=talentify
+HUB_USERNAME=talentify
+IMAGE_NAME="${HUB_USERNAME}/php-apache"
+BUILD_DIR='./docker/images/php-apache'
 
-docker build -t ${USERNAME}/php-apache:latest docker/images/php-apache/base
-docker tag ${USERNAME}/php-apache:latest ${USERNAME}/php-apache:base
+build_app() {
+    docker build --target base --tag ${IMAGE_NAME}:latest ${BUILD_DIR}
+    docker tag ${IMAGE_NAME}:latest ${IMAGE_NAME}:base
 
-docker build -t ${USERNAME}/php-apache:dev docker/images/php-apache/dev
+    docker build --target development --tag ${IMAGE_NAME}:dev ${BUILD_DIR}
 
-docker build -t ${USERNAME}/php-apache:circle docker/images/php-apache/circle
-docker build -t ${USERNAME}/ssh-selenium-standalone-chrome:latest docker/images/ssh-selenium-standalone-chrome
+    docker build --tag ${HUB_USERNAME}/utils:latest ./docker/images/utils
+}
 
-docker build -t ${USERNAME}/utils:latest docker/images/utils
+push_app() {
+    docker push ${IMAGE_NAME}:latest
+
+    docker push ${IMAGE_NAME}:dev
+
+    docker push ${HUB_USERNAME}/utils:latest
+}
+
+build_ci() {
+    docker build --target ci --tag ${IMAGE_NAME}:ci ${BUILD_DIR}
+    docker tag ${IMAGE_NAME}:ci ${IMAGE_NAME}:circle
+
+    docker build --tag ${HUB_USERNAME}/ssh-selenium-standalone-chrome:latest ./docker/images/ssh-selenium-standalone-chrome
+}
+
+push_ci() {
+    docker push ${IMAGE_NAME}:ci
+    docker push ${IMAGE_NAME}:circle
+
+    docker push ${HUB_USERNAME}/ssh-selenium-standalone-chrome:latest
+}
+
+build_app
+build_ci

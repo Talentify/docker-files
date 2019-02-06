@@ -1,0 +1,8 @@
+#!/bin/sh
+set -e
+
+# Check if the command must be executed as flux user
+. flux-run
+
+# Fallback to image default entry point
+. docker-php-entrypoint
