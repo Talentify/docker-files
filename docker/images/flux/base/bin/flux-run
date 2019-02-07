@@ -1,0 +1,15 @@
+#!/bin/bash
+#
+# Add the ability to run commands as "flux" user.
+#
+set -e
+
+# Add user and group if not already exists.
+# "flux" user is already created on the base image, the following code will be
+# useful if we need to remap the UID 1000 in the future.
+#getent group "$FLUX_GROUP" 2>&1 > /dev/null || groupadd -r $FLUX_GROUP --gid=$FLUX_USER_GID
+#getent passwd "$FLUX_USER" 2>&1 > /dev/null || useradd -r -g $FLUX_GROUP -G www-data --uid=$FLUX_USER_ID --create-home --shell=/bin/bash $FLUX_USER
+
+exec gosu $FLUX_USER "$@"
+
+exit 0

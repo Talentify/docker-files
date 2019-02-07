@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
-set -ex
+set -e
 
 . build.sh
 
+scream "Pushing Flux's images"
 push_app
+
+scream "Pushing CI's images"
 push_ci
