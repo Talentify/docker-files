@@ -1,5 +1,4 @@
 FROM talentify/flux:base
-LABEL version="1.1.0"
 LABEL description="Image for Flux's continuous integration."
 
 RUN apt-get update \
