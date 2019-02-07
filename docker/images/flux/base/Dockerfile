@@ -1,5 +1,4 @@
 FROM talentify/phalcon-framework:3.3-php-7.1-apache-stretch
-LABEL version="1.1.0"
 LABEL description="Base image for Flux application."
 
 # Install dependencies
