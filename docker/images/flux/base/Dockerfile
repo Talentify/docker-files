@@ -1,4 +1,4 @@
-FROM talentify/phalcon-framework:3.3-php-7.1-apache-stretch
+FROM talentify/phalcon-framework:3.3-php-7.1-apache-stretch-x64
 LABEL description="Base image for Flux application."
 
 # Install dependencies
