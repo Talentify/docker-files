@@ -1,6 +1,12 @@
 FROM talentify/flux:base
 LABEL description="Image for development on Flux application."
 
+# Install git in order to allow composer to clone talentify/ repositories.
+RUN set -eux; \
+	apt-get update; \
+	apt-get install -y git; \
+	rm -rf /var/lib/apt/lists/*
+
 # Configure PHP
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini" &&\
     pecl config-set php_ini "$PHP_INI_DIR/php.ini"
