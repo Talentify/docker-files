@@ -62,8 +62,8 @@ push_ci() {
     docker push ${HUB_USERNAME}/ssh-selenium-standalone-chrome:$(get_tag)
 }
 
-scream "Building Flux's images"
+scream "Building Flux's images with tag $(get_tag)"
 build_app
 
-scream "Building CI's images"
+scream "Building CI's images with tag $(get_tag)"
 build_ci

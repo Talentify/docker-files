@@ -6,7 +6,7 @@ This repository contains all images used by the Talentify dev team to build, tes
 
 
 ## Build and release
-* Use git flow in order to create a branch with the new version name **or** export the new version name like in `export DOCKER_TAG=1.2.0`
+* Use git flow in order to create a branch with the new version name **or** export the new version name like in `export DOCKER_TAG=v1.2.0`
 * `./build.sh`
 * `./release.sh`
 
