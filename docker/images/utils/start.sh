@@ -14,4 +14,4 @@ echo "Starting gulp"
 node_modules/gulp/bin/gulp.js watch &
 
 echo "Starting sass"
-sass --sourcemap=none --watch --poll static/sass:public/css
+sass --sourcemap=none --watch --poll sass:public/css
