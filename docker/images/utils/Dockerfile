@@ -1,6 +1,6 @@
 FROM node:9-stretch
-LABEL version="0.1.1"
-LABEL description="TalentFlux image to transpile assets.1"
+LABEL version="0.2.0"
+LABEL description="TalentFlux image to transpile assets."
 
 RUN apt-get update  \
     && apt-get install ruby-dev rubygems --assume-yes \
