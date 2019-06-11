@@ -2,13 +2,33 @@
 
 
 ## About
-This repository contains all images used by the Talentify dev team to build, test and deploy applications
+This repository contains some images used by the Talentify dev team to build, test and deploy applications.
+
+Note that breaking changes can occur without a new major version, as this image is intended to be used only locally.
+
+If you'd like to use Phalcon images for docker, take a look at https://github.com/Talentify/phalcon-framework-docker.
 
 
-## Build and release
-* Use git flow in order to create a branch with the new version name **or** export the new version name like in `export DOCKER_TAG=v1.2.0`
-* `./build.sh`
-* `./release.sh`
+## Building and releasing
+Each new image is released under a new tag like `v1.6.0`.
+
+You can build and release a new image using the provided scripts with either a new feature branch or an environment variable.
+
+Example using a feature branch:
+```console
+$ git flow release start 1.6.0
+# do your stuff
+$ git flow release finish 1.6.0
+$ ./build.sh
+$ ./release.sh
+```
+
+Example using an environment variable:
+```console
+$ export DOCKER_TAG=v1.2.0
+$ ./build.sh
+$ ./release.sh
+```
 
 
 ## Troubleshooting
