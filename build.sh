@@ -23,17 +23,16 @@ get_last_repo_tag() {
 
 build_app() {
     docker build --tag ${IMAGE_NAME}:base "${IMAGES_DIR}/flux/base"
-    docker tag ${IMAGE_NAME}:base ${IMAGE_NAME}:base-$DOCKER_TAG
+    docker tag "${IMAGE_NAME}:base" "${IMAGE_NAME}:base-$DOCKER_TAG"
 
     docker build --tag ${IMAGE_NAME}:dev "${IMAGES_DIR}/flux/dev"
-    docker tag ${IMAGE_NAME}:dev ${IMAGE_NAME}:dev-$DOCKER_TAG
+    docker tag "${IMAGE_NAME}:dev" "${IMAGE_NAME}:dev-$DOCKER_TAG"
 
     docker build --tag ${HUB_USERNAME}/utils:latest ./docker/images/utils
-    docker tag ${HUB_USERNAME}/utils:latest ${HUB_USERNAME}/utils:$DOCKER_TAG
-    docker tag ${HUB_USERNAME}/utils:latest ${HUB_USERNAME}/utils:$(get_tag)
+    docker tag "${HUB_USERNAME}/utils:latest" "${HUB_USERNAME}/utils:$DOCKER_TAG"
 
     docker build --tag ${HUB_USERNAME}/front:latest ./docker/images/front
-    docker tag ${HUB_USERNAME}/front:latest ${HUB_USERNAME}/front:$(get_tag)
+    docker tag "${HUB_USERNAME}/front:latest" "${HUB_USERNAME}/front:$DOCKER_TAG"
 }
 
 push_app() {
