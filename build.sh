@@ -30,6 +30,10 @@ build_app() {
 
     docker build --tag ${HUB_USERNAME}/utils:latest ./docker/images/utils
     docker tag ${HUB_USERNAME}/utils:latest ${HUB_USERNAME}/utils:$DOCKER_TAG
+    docker tag ${HUB_USERNAME}/utils:latest ${HUB_USERNAME}/utils:$(get_tag)
+
+    docker build --tag ${HUB_USERNAME}/front:latest ./docker/images/front
+    docker tag ${HUB_USERNAME}/front:latest ${HUB_USERNAME}/front:$(get_tag)
 }
 
 push_app() {
@@ -41,6 +45,9 @@ push_app() {
 
     docker push "${HUB_USERNAME}/utils:latest"
     docker push "${HUB_USERNAME}/utils:$DOCKER_TAG"
+
+    docker push "${HUB_USERNAME}/front:latest"
+    docker push "${HUB_USERNAME}/front:$DOCKER_TAG"
 }
 
 build_ci() {
