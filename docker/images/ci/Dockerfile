@@ -3,12 +3,16 @@ LABEL description="Image for Flux's continuous integration."
 
 RUN apt-get update \
     && apt-get install --assume-yes gnupg \
-    && curl -sL https://deb.nodesource.com/setup_9.x | bash -
+    && curl -sL https://deb.nodesource.com/setup_10.x | bash - \
+    && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+    && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
+    && apt-get update
 
 # git is needed for AWS cli in order to do the deployment process
 RUN apt-get install ruby-dev rubygems \
     git \
     nodejs \
+    yarn \
     python-dev python-pip\
     ssh sshpass \
     zip --assume-yes \

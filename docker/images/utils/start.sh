@@ -10,6 +10,9 @@ done
 echo "Running npm install"
 npm install --no-bin-links
 
+echo "Transpiling"
+node_modules/gulp/bin/gulp.js default
+
 echo "Starting gulp"
 node_modules/gulp/bin/gulp.js watch &
 
