@@ -1,4 +1,4 @@
-FROM node:9-stretch
+FROM node:10-stretch
 LABEL version="0.2.0"
 LABEL description="TalentFlux image to transpile assets."
 
