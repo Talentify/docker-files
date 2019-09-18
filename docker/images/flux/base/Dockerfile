@@ -20,6 +20,7 @@ RUN apt-get update && apt-get install -y \
         && docker-php-ext-install mysqli \
         && docker-php-ext-install pcntl \
         && docker-php-ext-install bcmath \
+        && docker-php-ext-install sockets \
         pdo_mysql \
         soap \
         && pecl install redis \
