@@ -1,16 +1,16 @@
-FROM talentify/phalcon-framework:3.3-php-7.2-apache-stretch-x64
+FROM talentify/phalcon-framework:3.3-php-7.2-apache-buster
 LABEL description="Base image for Flux application."
 
 # Install dependencies
 # RabbitMQ/amqp extension needs librabbitmq-dev and libssh-dev apt packages.
 # Source: https://github.com/php-amqplib/php-amqplib/issues/521#issuecomment-357807290
 RUN apt-get update && apt-get install -y \
-        libcurl3 \
+        libcurl4 \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
         libpng-dev \
         libyaml-dev \
-        mysql-client \
+        default-mysql-client \
         ssl-cert \
         libxml2-dev \
         librabbitmq-dev \
@@ -20,6 +20,7 @@ RUN apt-get update && apt-get install -y \
         && docker-php-ext-install mysqli \
         && docker-php-ext-install pcntl \
         && docker-php-ext-install bcmath \
+        && docker-php-ext-install sockets \
         pdo_mysql \
         soap \
         && pecl install redis \
