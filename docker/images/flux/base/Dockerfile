@@ -33,7 +33,7 @@ RUN apt-get update && apt-get install -y \
         amqp
 
 # Configure Apache
-RUN a2enmod rewrite ssl
+RUN a2enmod rewrite ssl proxy proxy_http proxy_connect proxy_wstunnel allowmethods
 COPY --chown=www-data sites-enable/* /etc/apache2/sites-enabled/
 EXPOSE 443
 
