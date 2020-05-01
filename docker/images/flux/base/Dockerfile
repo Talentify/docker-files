@@ -21,6 +21,7 @@ RUN apt-get update && apt-get install -y \
         && docker-php-ext-install pcntl \
         && docker-php-ext-install bcmath \
         && docker-php-ext-install sockets \
+        && docker-php-ext-install intl \
         pdo_mysql \
         soap \
         && pecl install redis \
