@@ -23,5 +23,4 @@ RUN pecl install xdebug-2.6.0 \
         && rm /tmp/xdebug.ini
 
 # Add composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-RUN flux-run composer global require hirak/prestissimo
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
