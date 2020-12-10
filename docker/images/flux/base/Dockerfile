@@ -1,4 +1,4 @@
-FROM talentify/phalcon-framework:3.3-php-7.2-apache-buster
+FROM talentify/phalcon-framework:3.4-php-7.3-apache-buster
 LABEL description="Base image for Flux application."
 
 # Install dependencies
