@@ -19,7 +19,7 @@ RUN apt-get install ruby-dev rubygems \
     && gem update --system \
     && gem install sass --no-user-install \
     && npm install -g grunt-cli \
-    && pip install awsebcli --upgrade \
+    && pip3 install awsebcli --upgrade \
     && curl -sOL https://github.com/jwilder/dockerize/releases/download/v0.6.1/dockerize-linux-amd64-v0.6.1.tar.gz \
     && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-v0.6.1.tar.gz \
     && rm dockerize-linux-amd64-v0.6.1.tar.gz
@@ -33,5 +33,4 @@ RUN pecl install xdebug-2.9.7 \
         && rm /tmp/xdebug.ini
 
 # Add composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-RUN composer global require hirak/prestissimo
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
