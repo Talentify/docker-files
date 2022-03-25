@@ -12,11 +12,11 @@ RUN apt-get update \
 RUN apt-get install ruby-dev rubygems \
     git \
     nodejs \
+    npm \
     yarn \
     python3-dev python3-pip\
     ssh sshpass \
     zip --assume-yes \
-    && gem update --system \
     && gem install sass --no-user-install \
     && npm install -g grunt-cli \
     && pip3 install awsebcli --upgrade \
