@@ -1,4 +1,4 @@
-FROM talentify/flux:base
+FROM talentify/flux:base-upgrade
 LABEL description="Image for development on Flux application."
 
 # Install git in order to allow composer to clone talentify/ repositories.
