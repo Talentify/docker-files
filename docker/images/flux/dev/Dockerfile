@@ -22,5 +22,7 @@ RUN pecl install xdebug-2.9.7 \
         && cat /tmp/xdebug.ini | grep -v '^#' >> "$PHP_INI_DIR/conf.d/docker-php-ext-xdebug.ini" \
         && rm /tmp/xdebug.ini
 
+RUN echo "Mutex posixsem" >> /etc/apache2/apache2.conf
+
 # Add composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
