@@ -12,15 +12,18 @@ RUN apt-get update \
 RUN apt-get install ruby-dev rubygems \
     git \
     nodejs \
+    npm \
     yarn \
     python3-dev python3-pip\
     ssh sshpass \
-    zip --assume-yes \
-    && gem update --system \
-    && gem install sass --no-user-install \
-    && npm install -g grunt-cli \
-    && pip3 install awsebcli --upgrade \
-    && curl -sOL https://github.com/jwilder/dockerize/releases/download/v0.6.1/dockerize-linux-amd64-v0.6.1.tar.gz \
+    zip --assume-yes
+
+RUN gem install sass --no-user-install \
+    && npm install -g grunt-cli
+
+RUN pip3 install awsebcli --upgrade
+
+RUN curl -sOL https://github.com/jwilder/dockerize/releases/download/v0.6.1/dockerize-linux-amd64-v0.6.1.tar.gz \
     && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-v0.6.1.tar.gz \
     && rm dockerize-linux-amd64-v0.6.1.tar.gz
 
