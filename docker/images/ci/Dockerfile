@@ -1,4 +1,4 @@
-FROM talentify/flux:base-phalcon41
+FROM talentify/flux:base-v3.0.0
 LABEL description="Image for Flux's continuous integration."
 
 RUN apt-get update \

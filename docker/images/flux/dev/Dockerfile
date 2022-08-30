@@ -1,4 +1,4 @@
-FROM talentify/flux:base-phalcon41
+FROM talentify/flux:base
 LABEL description="Image for development on Flux application."
 
 # Install git in order to allow composer to clone talentify/ repositories.
@@ -21,8 +21,6 @@ RUN pecl install xdebug-2.9.7 \
         && docker-php-ext-enable xdebug \
         && cat /tmp/xdebug.ini | grep -v '^#' >> "$PHP_INI_DIR/conf.d/docker-php-ext-xdebug.ini" \
         && rm /tmp/xdebug.ini
-
-# RUN echo "Mutex posixsem" >> /etc/apache2/apache2.conf
 
 # Add composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
