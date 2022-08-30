@@ -1,4 +1,4 @@
-FROM talentify/flux:base-v3.0.0
+FROM talentify/flux:base
 LABEL description="Image for Flux's continuous integration."
 
 RUN apt-get update \
